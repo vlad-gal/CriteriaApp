@@ -67,7 +67,7 @@ public class Validator {
                     flag = Double.parseDouble(value.toString()) > 0;
                 } else if (value instanceof String) {
                     matcher = pattern.matcher(value.toString());
-                    flag = matcher.find();
+                    flag = matcher.matches();
                 }
             }
         }
