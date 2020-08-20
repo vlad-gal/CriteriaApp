@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ApplianceDAOImpl implements ApplianceDAO {
     private static final String PROPERTIES = "config";
@@ -36,8 +37,8 @@ public class ApplianceDAOImpl implements ApplianceDAO {
         }
         Path path = Paths.get(file.getPath());
         List<String> appliances;
-        try {
-            appliances = Files.lines(path)
+        try (Stream<String> appliance = Files.lines(path)) {
+            appliances = appliance
                     .filter(app -> !app.isEmpty())
                     .filter(app -> app.contains(criteria.getGroupSearchName()))
                     .filter(app -> {
