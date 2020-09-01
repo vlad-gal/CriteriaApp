@@ -13,7 +13,6 @@ public class RefrigeratorCreator implements ApplianceCreator {
     public Appliance createAppliance(String applianceData) {
         ApplianceParser parser = ApplianceParser.getInstance();
         Map<String, String> applianceParameter = parser.parseAppliance(applianceData);
-        Refrigerator refrigerator = new Refrigerator();
         double powerConsumption = Double
                 .parseDouble(applianceParameter.get(ApplianceParameter.POWER_CONSUMPTION.getParameterName()));
         double weight = Double
@@ -26,12 +25,6 @@ public class RefrigeratorCreator implements ApplianceCreator {
                 .parseDouble(applianceParameter.get(ApplianceParameter.HEIGHT.getParameterName()));
         double width = Double
                 .parseDouble(applianceParameter.get(ApplianceParameter.WIDTH.getParameterName()));
-        refrigerator.setPowerConsumption(powerConsumption);
-        refrigerator.setWeight(weight);
-        refrigerator.setFreezerCapacity(freezerCapacity);
-        refrigerator.setOverallCapacity(overallCapacity);
-        refrigerator.setHeight(height);
-        refrigerator.setWidth(width);
-        return refrigerator;
+        return new Refrigerator(powerConsumption, weight, freezerCapacity, overallCapacity, height, width);
     }
 }

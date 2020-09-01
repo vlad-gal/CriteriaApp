@@ -15,7 +15,6 @@ public class SpeakersCreator implements ApplianceCreator {
     public Appliance createAppliance(String applianceData) {
         ApplianceParser parser = ApplianceParser.getInstance();
         Map<String, String> applianceParameter = parser.parseAppliance(applianceData);
-        Speakers speakers = new Speakers();
         double powerConsumption = Double
                 .parseDouble(applianceParameter.get(ApplianceParameter.POWER_CONSUMPTION.getParameterName()));
         int numberOfSpeakers = Integer
@@ -26,11 +25,6 @@ public class SpeakersCreator implements ApplianceCreator {
                 .parseDouble(applianceParameter.get(ApplianceParameter.FREQUENCY_RANGE.getParameterName()).split(REGEX_HYPHEN)[1]);
         double cordLength = Double
                 .parseDouble(applianceParameter.get(ApplianceParameter.CORD_LENGTH.getParameterName()));
-        speakers.setPowerConsumption(powerConsumption);
-        speakers.setNumberOfSpeakers(numberOfSpeakers);
-        speakers.setStartFrequencyRange(startFrequencyRange);
-        speakers.setEndFrequencyRange(endFrequencyRange);
-        speakers.setCordLength(cordLength);
-        return speakers;
+        return new Speakers(powerConsumption, numberOfSpeakers, startFrequencyRange, endFrequencyRange, cordLength);
     }
 }

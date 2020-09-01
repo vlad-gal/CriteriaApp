@@ -11,7 +11,6 @@ public final class ServiceFactory {
     }
 
     public ApplianceService getApplianceService() {
-
         return applianceService;
     }
 

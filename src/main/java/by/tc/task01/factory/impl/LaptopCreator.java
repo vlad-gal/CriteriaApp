@@ -13,7 +13,6 @@ public class LaptopCreator implements ApplianceCreator {
     public Appliance createAppliance(String applianceData) {
         ApplianceParser parser = ApplianceParser.getInstance();
         Map<String, String> applianceParameter = parser.parseAppliance(applianceData);
-        Laptop laptop = new Laptop();
         double batteryCapacity = Double
                 .parseDouble(applianceParameter.get(ApplianceParameter.BATTERY_CAPACITY.getParameterName()));
         String operationSystem = applianceParameter.get(ApplianceParameter.OS.getParameterName());
@@ -21,16 +20,10 @@ public class LaptopCreator implements ApplianceCreator {
                 .parseDouble(applianceParameter.get(ApplianceParameter.MEMORY_ROM.getParameterName()));
         double systemMemory = Double
                 .parseDouble(applianceParameter.get(ApplianceParameter.SYSTEM_MEMORY.getParameterName()));
-        double CPU = Double
+        double cpu = Double
                 .parseDouble(applianceParameter.get(ApplianceParameter.CPU.getParameterName()));
         double displayInches = Double
                 .parseDouble(applianceParameter.get(ApplianceParameter.DISPLAY_INCHES.getParameterName()));
-        laptop.setBatteryCapacity(batteryCapacity);
-        laptop.setOperationSystem(operationSystem);
-        laptop.setMemoryROM(memoryROM);
-        laptop.setSystemMemory(systemMemory);
-        laptop.setCPU(CPU);
-        laptop.setDisplayInches(displayInches);
-        return laptop;
+        return new Laptop(batteryCapacity, operationSystem, memoryROM, systemMemory, cpu, displayInches);
     }
 }

@@ -1,6 +1,7 @@
 package by.tc.task01.entity;
 
-public class Refrigerator extends Appliance {
+public class Refrigerator implements Appliance {
+    private String name;
     private double powerConsumption;
     private double weight;
     private double freezerCapacity;
@@ -9,17 +10,21 @@ public class Refrigerator extends Appliance {
     private double width;
 
     public Refrigerator() {
-        super(Refrigerator.class.getSimpleName());
+        name = Refrigerator.class.getSimpleName();
     }
 
     public Refrigerator(double powerConsumption, double weight, double freezerCapacity, double overallCapacity, double height, double width) {
-        super(Refrigerator.class.getSimpleName());
+        name = Refrigerator.class.getSimpleName();
         this.powerConsumption = powerConsumption;
         this.weight = weight;
         this.freezerCapacity = freezerCapacity;
         this.overallCapacity = overallCapacity;
         this.height = height;
         this.width = width;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public double getPowerConsumption() {
@@ -74,7 +79,6 @@ public class Refrigerator extends Appliance {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
 
         Refrigerator that = (Refrigerator) o;
 
@@ -83,13 +87,15 @@ public class Refrigerator extends Appliance {
         if (Double.compare(that.freezerCapacity, freezerCapacity) != 0) return false;
         if (Double.compare(that.overallCapacity, overallCapacity) != 0) return false;
         if (Double.compare(that.height, height) != 0) return false;
-        return Double.compare(that.width, width) == 0;
+        if (Double.compare(that.width, width) != 0) return false;
+        return name.equals(that.name);
     }
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
+        int result;
         long temp;
+        result = name.hashCode();
         temp = Double.doubleToLongBits(powerConsumption);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(weight);

@@ -1,6 +1,7 @@
 package by.tc.task01.entity;
 
-public class Oven extends Appliance {
+public class Oven implements Appliance {
+    private String name;
     private double powerConsumption;
     private double weight;
     private double capacity;
@@ -9,17 +10,21 @@ public class Oven extends Appliance {
     private double width;
 
     public Oven() {
-        super(Oven.class.getSimpleName());
+        name = Oven.class.getSimpleName();
     }
 
     public Oven(double powerConsumption, double weight, double capacity, double depth, double height, double width) {
-        super(Oven.class.getSimpleName());
+        name = Oven.class.getSimpleName();
         this.powerConsumption = powerConsumption;
         this.weight = weight;
         this.capacity = capacity;
         this.depth = depth;
         this.height = height;
         this.width = width;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public double getPowerConsumption() {
@@ -74,7 +79,6 @@ public class Oven extends Appliance {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
 
         Oven oven = (Oven) o;
 
@@ -83,13 +87,15 @@ public class Oven extends Appliance {
         if (Double.compare(oven.capacity, capacity) != 0) return false;
         if (Double.compare(oven.depth, depth) != 0) return false;
         if (Double.compare(oven.height, height) != 0) return false;
-        return Double.compare(oven.width, width) == 0;
+        if (Double.compare(oven.width, width) != 0) return false;
+        return name.equals(oven.name);
     }
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
+        int result;
         long temp;
+        result = name.hashCode();
         temp = Double.doubleToLongBits(powerConsumption);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(weight);

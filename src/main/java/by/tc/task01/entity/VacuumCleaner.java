@@ -1,6 +1,7 @@
 package by.tc.task01.entity;
 
-public class VacuumCleaner extends Appliance {
+public class VacuumCleaner implements Appliance {
+    private String name;
     private double powerConsumption;
     private String filterType;
     private String bagType;
@@ -9,17 +10,21 @@ public class VacuumCleaner extends Appliance {
     private double cleaningWidth;
 
     public VacuumCleaner() {
-        super(VacuumCleaner.class.getSimpleName());
+        name = VacuumCleaner.class.getSimpleName();
     }
 
     public VacuumCleaner(double powerConsumption, String filterType, String bagType, String wandType, double motorSpeedRegulation, double cleaningWidth) {
-        super(VacuumCleaner.class.getSimpleName());
+        name = VacuumCleaner.class.getSimpleName();
         this.powerConsumption = powerConsumption;
         this.filterType = filterType;
         this.bagType = bagType;
         this.wandType = wandType;
         this.motorSpeedRegulation = motorSpeedRegulation;
         this.cleaningWidth = cleaningWidth;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public double getPowerConsumption() {
@@ -74,27 +79,28 @@ public class VacuumCleaner extends Appliance {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
 
-        VacuumCleaner that = (VacuumCleaner) o;
+        VacuumCleaner cleaner = (VacuumCleaner) o;
 
-        if (Double.compare(that.powerConsumption, powerConsumption) != 0) return false;
-        if (Double.compare(that.motorSpeedRegulation, motorSpeedRegulation) != 0) return false;
-        if (Double.compare(that.cleaningWidth, cleaningWidth) != 0) return false;
-        if (filterType != null ? !filterType.equals(that.filterType) : that.filterType != null) return false;
-        if (bagType != null ? !bagType.equals(that.bagType) : that.bagType != null) return false;
-        return wandType != null ? wandType.equals(that.wandType) : that.wandType == null;
+        if (Double.compare(cleaner.powerConsumption, powerConsumption) != 0) return false;
+        if (Double.compare(cleaner.motorSpeedRegulation, motorSpeedRegulation) != 0) return false;
+        if (Double.compare(cleaner.cleaningWidth, cleaningWidth) != 0) return false;
+        if (!name.equals(cleaner.name)) return false;
+        if (!filterType.equals(cleaner.filterType)) return false;
+        if (!bagType.equals(cleaner.bagType)) return false;
+        return wandType.equals(cleaner.wandType);
     }
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
+        int result;
         long temp;
+        result = name.hashCode();
         temp = Double.doubleToLongBits(powerConsumption);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (filterType != null ? filterType.hashCode() : 0);
-        result = 31 * result + (bagType != null ? bagType.hashCode() : 0);
-        result = 31 * result + (wandType != null ? wandType.hashCode() : 0);
+        result = 31 * result + filterType.hashCode();
+        result = 31 * result + bagType.hashCode();
+        result = 31 * result + wandType.hashCode();
         temp = Double.doubleToLongBits(motorSpeedRegulation);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(cleaningWidth);

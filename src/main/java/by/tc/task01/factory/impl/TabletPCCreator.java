@@ -13,7 +13,6 @@ public class TabletPCCreator implements ApplianceCreator {
     public Appliance createAppliance(String applianceData) {
         ApplianceParser parser = ApplianceParser.getInstance();
         Map<String, String> applianceParameter = parser.parseAppliance(applianceData);
-        TabletPC tabletPC = new TabletPC();
         double batteryCapacity = Double
                 .parseDouble(applianceParameter.get(ApplianceParameter.BATTERY_CAPACITY.getParameterName()));
         double displayInches = Integer
@@ -23,11 +22,6 @@ public class TabletPCCreator implements ApplianceCreator {
         double flashMemoryCapacity = Double
                 .parseDouble(applianceParameter.get(ApplianceParameter.FLASH_MEMORY_CAPACITY.getParameterName()));
         String color = applianceParameter.get(ApplianceParameter.COLOR.getParameterName());
-        tabletPC.setBatteryCapacity(batteryCapacity);
-        tabletPC.setDisplayInches(displayInches);
-        tabletPC.setMemoryROM(memoryROM);
-        tabletPC.setFlashMemoryCapacity(flashMemoryCapacity);
-        tabletPC.setColor(color);
-        return tabletPC;
+        return new TabletPC(batteryCapacity, displayInches, memoryROM, flashMemoryCapacity, color);
     }
 }

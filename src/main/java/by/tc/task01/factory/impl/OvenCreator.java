@@ -13,7 +13,6 @@ public class OvenCreator implements ApplianceCreator {
     public Appliance createAppliance(String applianceData) {
         ApplianceParser parser = ApplianceParser.getInstance();
         Map<String, String> applianceParameter = parser.parseAppliance(applianceData);
-        Oven oven = new Oven();
         double powerConsumption = Double
                 .parseDouble(applianceParameter.get(ApplianceParameter.POWER_CONSUMPTION.getParameterName()));
         double weight = Double
@@ -26,12 +25,6 @@ public class OvenCreator implements ApplianceCreator {
                 .parseDouble(applianceParameter.get(ApplianceParameter.HEIGHT.getParameterName()));
         double width = Double
                 .parseDouble(applianceParameter.get(ApplianceParameter.WIDTH.getParameterName()));
-        oven.setPowerConsumption(powerConsumption);
-        oven.setWeight(weight);
-        oven.setCapacity(capacity);
-        oven.setDepth(depth);
-        oven.setHeight(height);
-        oven.setWidth(width);
-        return oven;
+        return new Oven(powerConsumption, weight, capacity, depth, height, width);
     }
 }

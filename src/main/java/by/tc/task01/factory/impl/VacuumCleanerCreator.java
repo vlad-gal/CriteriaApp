@@ -13,7 +13,6 @@ public class VacuumCleanerCreator implements ApplianceCreator {
     public Appliance createAppliance(String applianceData) {
         ApplianceParser parser = ApplianceParser.getInstance();
         Map<String, String> applianceParameter = parser.parseAppliance(applianceData);
-        VacuumCleaner vacuumCleaner = new VacuumCleaner();
         double powerConsumption = Double
                 .parseDouble(applianceParameter.get(ApplianceParameter.POWER_CONSUMPTION.getParameterName()));
         String filterType = applianceParameter.get(ApplianceParameter.FILTER_TYPE.getParameterName());
@@ -23,12 +22,6 @@ public class VacuumCleanerCreator implements ApplianceCreator {
                 .parseInt(applianceParameter.get(ApplianceParameter.MOTOR_SPEED_REGULATION.getParameterName()));
         double cleaningWidth = Double
                 .parseDouble(applianceParameter.get(ApplianceParameter.CLEANING_WIDTH.getParameterName()));
-        vacuumCleaner.setPowerConsumption(powerConsumption);
-        vacuumCleaner.setFilterType(filterType);
-        vacuumCleaner.setBagType(bagType);
-        vacuumCleaner.setWandType(wandType);
-        vacuumCleaner.setMotorSpeedRegulation(motorSpeedRegulation);
-        vacuumCleaner.setCleaningWidth(cleaningWidth);
-        return vacuumCleaner;
+        return new VacuumCleaner(powerConsumption, filterType, bagType, wandType, motorSpeedRegulation, cleaningWidth);
     }
 }

@@ -1,6 +1,7 @@
 package by.tc.task01.entity;
 
-public class TabletPC extends Appliance {
+public class TabletPC implements Appliance {
+    private String name;
     private double batteryCapacity;
     private double displayInches;
     private double memoryROM;
@@ -8,16 +9,20 @@ public class TabletPC extends Appliance {
     private String color;
 
     public TabletPC() {
-        super(TabletPC.class.getSimpleName());
+        name = TabletPC.class.getSimpleName();
     }
 
     public TabletPC(double batteryCapacity, double displayInches, double memoryROM, double flashMemoryCapacity, String color) {
-        super(TabletPC.class.getSimpleName());
+        name = TabletPC.class.getSimpleName();
         this.batteryCapacity = batteryCapacity;
         this.displayInches = displayInches;
         this.memoryROM = memoryROM;
         this.flashMemoryCapacity = flashMemoryCapacity;
         this.color = color;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public double getBatteryCapacity() {
@@ -64,7 +69,6 @@ public class TabletPC extends Appliance {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
 
         TabletPC tabletPC = (TabletPC) o;
 
@@ -72,13 +76,15 @@ public class TabletPC extends Appliance {
         if (Double.compare(tabletPC.displayInches, displayInches) != 0) return false;
         if (Double.compare(tabletPC.memoryROM, memoryROM) != 0) return false;
         if (Double.compare(tabletPC.flashMemoryCapacity, flashMemoryCapacity) != 0) return false;
-        return color != null ? color.equals(tabletPC.color) : tabletPC.color == null;
+        if (!name.equals(tabletPC.name)) return false;
+        return color.equals(tabletPC.color);
     }
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
+        int result;
         long temp;
+        result = name.hashCode();
         temp = Double.doubleToLongBits(batteryCapacity);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(displayInches);
@@ -87,7 +93,7 @@ public class TabletPC extends Appliance {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(flashMemoryCapacity);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (color != null ? color.hashCode() : 0);
+        result = 31 * result + color.hashCode();
         return result;
     }
 
